@@ -14,7 +14,7 @@ import com.percolate.caffeine.ViewUtils;
 
 public class ButtonCancel extends Button {
 
-    ButtonCancel(AuroraActivity activity, App app) {
+    public ButtonCancel(AuroraActivity activity, App app) {
         super(activity, app);
     }
 
@@ -24,7 +24,7 @@ public class ButtonCancel extends Button {
     }
 
     @Override
-    protected boolean shouldBeVisible() {
+    public boolean shouldBeVisible() {
         return !DownloadState.get(app.getPackageName()).isEverythingFinished();
     }
 

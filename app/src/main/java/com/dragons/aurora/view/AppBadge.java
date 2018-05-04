@@ -1,22 +1,27 @@
 package com.dragons.aurora.view;
 
+import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.dragons.aurora.NetworkState;
+import com.dragons.aurora.R;
+import com.dragons.aurora.activities.AuroraActivity;
+import com.dragons.aurora.activities.DetailsActivity;
+import com.dragons.aurora.fragment.PreferenceFragment;
+import com.dragons.aurora.fragment.details.ButtonCancel;
+import com.dragons.aurora.fragment.details.ButtonDownload;
+import com.dragons.aurora.model.App;
+import com.dragons.aurora.model.ImageSource;
+import com.dragons.aurora.notification.CancelDownloadService;
+import com.dragons.aurora.task.LoadImageTask;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.WeakHashMap;
-
-import com.dragons.aurora.NetworkState;
-import com.dragons.aurora.fragment.PreferenceFragment;
-import com.dragons.aurora.R;
-import com.dragons.aurora.model.App;
-import com.dragons.aurora.model.ImageSource;
-import com.dragons.aurora.task.LoadImageTask;
 
 public abstract class AppBadge extends ListItem {
 
@@ -26,12 +31,12 @@ public abstract class AppBadge extends ListItem {
     protected List<String> line2 = new ArrayList<>();
     protected List<String> line3 = new ArrayList<>();
 
-    public void setApp(App app) {
-        this.app = app;
-    }
-
     public App getApp() {
         return app;
+    }
+
+    public void setApp(App app) {
+        this.app = app;
     }
 
     @Override
@@ -45,11 +50,11 @@ public abstract class AppBadge extends ListItem {
 
         drawIcon((ImageView) view.findViewById(R.id.icon));
 
-        if(app.isTestingProgramOptedIn())
+        if (app.isTestingProgramOptedIn())
             view.findViewById(R.id.beta_user).setVisibility(View.VISIBLE);
-        if(app.isTestingProgramAvailable())
+        if (app.isTestingProgramAvailable())
             view.findViewById(R.id.beta_avail).setVisibility(View.VISIBLE);
-        if(app.isEarlyAccess())
+        if (app.isEarlyAccess())
             view.findViewById(R.id.early_access).setVisibility(View.VISIBLE);
     }
 
@@ -57,7 +62,7 @@ public abstract class AppBadge extends ListItem {
         ImageSource imageSource = app.getIconInfo();
         if (null != imageSource.getApplicationInfo() && !noImages()) {
             imageView.setImageDrawable(imageView.getContext().getPackageManager().getApplicationIcon(imageSource.getApplicationInfo()));
-        } else if(!noImages()) {
+        } else if (!noImages()) {
             Picasso
                     .with(view.getContext())
                     .load(imageSource.getUrl())
