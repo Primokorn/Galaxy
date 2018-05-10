@@ -1,4 +1,4 @@
-<img src="https://github.com/whyorean/Galaxy/blob/galaxy/resources/galaxy.png" height="150" width="150"/>
+<img src="https://github.com/whyorean/Galaxy/raw/master/resources/galaxy.png" height="150" width="150"/>
 
 Galaxy - a Google Playstore alternative 
 ==============================================================
